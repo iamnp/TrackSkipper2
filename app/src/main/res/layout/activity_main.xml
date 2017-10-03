@@ -28,16 +28,24 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Re)start service"
-        android:onClick="restartService"
+        android:text="Start service"
+        android:onClick="startService"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Stop service"
+        android:onClick="stopService"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Check Status"
         android:onClick="checkServiceStatus"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 </android.support.constraint.ConstraintLayout>

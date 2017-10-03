@@ -3,8 +3,12 @@ package com.trackskipper2;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,13 +35,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void restartService(View view) {
-        if (isServiceRunning()) {
-            stopService(new Intent(this, TrackSkipperService.class));
-        }
-        startService(new Intent(this, TrackSkipperService.class));
-    }
-
     private boolean isServiceRunning() {
         ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -53,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "RUNNING", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "NOT RUNNING", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void startService(View view) {
+        if (isServiceRunning()) {
+            stopService(new Intent(this, TrackSkipperService.class));
+        }
+        startForegroundService(new Intent(this, TrackSkipperService.class));
+    }
+
+    public void stopService(View view) {
+        if (isServiceRunning()) {
+            stopService(new Intent(this, TrackSkipperService.class));
         }
     }
 }

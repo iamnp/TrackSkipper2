@@ -1,5 +1,6 @@
 package com.trackskipper2;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -7,6 +8,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.v7.app.NotificationCompat;
 import android.view.KeyEvent;
 
 public class TrackSkipperService extends Service {
@@ -38,6 +40,13 @@ public class TrackSkipperService extends Service {
 
     @Override
     public void onCreate() {
+        Notification.Builder builder = new Notification.Builder(this, "lolkek123")
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText("TrackSkipper")
+                .setAutoCancel(true);
+
+        Notification notification = builder.build();
+        startForeground(1, notification);
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
         pm = (PowerManager) getSystemService(POWER_SERVICE);
         volumeKeyLongPressListener = new VolumeKeyLongPressListener(this, onVolumeKeyLongPressListener);
